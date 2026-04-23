@@ -128,13 +128,12 @@ export default function Home() {
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/80 backdrop-blur-lg z-30 p-8 text-center animate-in fade-in zoom-in duration-500">
                   {gameState === 'success' ? (
                     <>
-                      <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-6 border border-green-500/30">
-                        <svg className="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mb-3 border border-green-500/30">
+                        <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
                         </svg>
                       </div>
-                      <h2 className="text-5xl font-black text-white mb-2 italic">MISSION COMPLETE</h2>
-                      <p className="text-zinc-400 mb-8">성공적으로 임무를 완수했습니다!</p>
+                      <h2 className="text-3xl font-black text-white mb-4 italic">MISSION COMPLETE</h2>
                       <div className="bg-white/5 border border-white/10 rounded-2xl p-4 w-full mb-3">
                         <div className="text-[10px] text-zinc-500 uppercase font-bold tracking-widest mb-1">Final Time</div>
                         <div className="text-2xl font-black text-blue-400 font-mono tracking-tighter">{finalTime}</div>
