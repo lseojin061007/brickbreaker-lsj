@@ -62,8 +62,7 @@ export default function Leaderboard() {
                     {index + 1}
                   </span>
                   <div className="flex flex-col">
-                    <p className="font-bold text-white text-sm truncate max-w-[100px] leading-tight">{rank.name}</p>
-                    <p className="text-[8px] text-zinc-500 font-mono tracking-tighter">{rank.timestamp?.split(' ')[0]}</p>
+                    <p className="font-bold text-white text-sm truncate max-w-[150px] leading-tight">{rank.name}</p>
                   </div>
                 </div>
                 <div className="text-right">
