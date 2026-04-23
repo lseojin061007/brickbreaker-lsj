@@ -135,37 +135,37 @@ export default function Home() {
                       </div>
                       <h2 className="text-5xl font-black text-white mb-2 italic">MISSION COMPLETE</h2>
                       <p className="text-zinc-400 mb-8">성공적으로 임무를 완수했습니다!</p>
-                      <div className="bg-white/5 border border-white/10 rounded-2xl p-6 w-full mb-4">
-                        <div className="text-xs text-zinc-500 uppercase font-bold tracking-widest mb-1">Final Time</div>
-                        <div className="text-4xl font-black text-blue-400 font-mono tracking-tighter">{finalTime}</div>
+                      <div className="bg-white/5 border border-white/10 rounded-2xl p-4 w-full mb-3">
+                        <div className="text-[10px] text-zinc-500 uppercase font-bold tracking-widest mb-1">Final Time</div>
+                        <div className="text-2xl font-black text-blue-400 font-mono tracking-tighter">{finalTime}</div>
                       </div>
                       
                       {/* Top 3 Hall of Fame */}
-                      <div className="w-full mb-4">
+                      <div className="w-full mb-3">
                         <Leaderboard />
                       </div>
                     </>
                   ) : (
                     <>
-                      <div className="w-20 h-20 bg-red-500/20 rounded-full flex items-center justify-center mb-6 border border-red-500/30">
-                        <svg className="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mb-4 border border-red-500/30">
+                        <svg className="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                       </div>
-                      <h2 className="text-5xl font-black text-white mb-2 italic">MISSION FAILED</h2>
-                      <p className="text-zinc-400 mb-10">생명을 모두 잃었습니다.</p>
+                      <h2 className="text-4xl font-black text-white mb-1 italic">MISSION FAILED</h2>
+                      <p className="text-zinc-400 mb-6 text-sm">생명을 모두 잃었습니다.</p>
                     </>
                   )}
-                  <div className="flex flex-col gap-4 w-full">
+                  <div className="flex flex-col gap-3 w-full">
                     <button 
                       onClick={handleRestart}
-                      className="w-full py-4 bg-white text-black font-black rounded-xl hover:scale-105 transition-transform"
+                      className="w-full py-3 bg-white text-black font-black rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-transform text-sm"
                     >
                       TRY AGAIN
                     </button>
                     <button 
                       onClick={handleRestart}
-                      className="text-zinc-500 hover:text-white text-sm font-bold transition-colors"
+                      className="w-full py-2 text-zinc-500 hover:text-white text-xs font-bold transition-colors"
                     >
                       BACK TO MAIN
                     </button>
