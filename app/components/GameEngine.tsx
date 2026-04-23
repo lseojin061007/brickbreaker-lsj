@@ -342,20 +342,20 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
         {/* HUD */}
         <div className="w-full flex justify-between items-center mb-4 px-2 text-white font-mono">
           <div className="flex flex-col">
-            <span className="text-[10px] text-zinc-500 uppercase">Lives</span>
+            <span className="text-[8px] sm:text-[10px] text-zinc-500 uppercase">Lives</span>
             <div className="flex gap-1">
               {[...Array(INITIAL_LIVES)].map((_, i) => (
-                <div key={i} className={`w-3 h-3 rounded-full ${i < lives ? 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 'bg-zinc-800'}`}></div>
+                <div key={i} className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${i < lives ? 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 'bg-zinc-800'}`}></div>
               ))}
             </div>
           </div>
           <div className="flex flex-col items-center">
-            <span className="text-[10px] text-zinc-500 uppercase">Target (Red)</span>
-            <span className="text-xl font-black text-red-400">{redBricksRemoved} / 3</span>
+            <span className="text-[8px] sm:text-[10px] text-zinc-500 uppercase">Target (Red)</span>
+            <span className="text-base sm:text-xl font-black text-red-400">{redBricksRemoved} / 3</span>
           </div>
           <div className="flex flex-col items-end">
-            <span className="text-[10px] text-zinc-500 uppercase">Time</span>
-            <span className="text-xl font-black tabular-nums">{Math.floor(time / 60)}:{(time % 60).toString().padStart(2, '0')}</span>
+            <span className="text-[8px] sm:text-[10px] text-zinc-500 uppercase">Time</span>
+            <span className="text-base sm:text-xl font-black tabular-nums">{Math.floor(time / 60)}:{(time % 60).toString().padStart(2, '0')}</span>
           </div>
         </div>
 

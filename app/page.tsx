@@ -72,18 +72,18 @@ export default function Home() {
         </div>
       )}
 
-      <header className="z-10 mb-8 text-center">
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter bg-gradient-to-b from-white to-zinc-600 bg-clip-text text-transparent drop-shadow-2xl italic">
+      <header className="z-10 mb-6 text-center px-4">
+        <h1 className="text-4xl sm:text-7xl font-black tracking-tighter bg-gradient-to-b from-white to-zinc-600 bg-clip-text text-transparent drop-shadow-2xl italic leading-none">
           INU 벽돌깨기
         </h1>
-        <div className="h-1 w-24 bg-blue-500 mx-auto mt-4 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
+        <div className="h-1 w-16 sm:w-24 bg-blue-500 mx-auto mt-2 sm:mt-4 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
       </header>
 
-      <main className="z-10 w-full max-w-6xl flex flex-col lg:flex-row gap-12 items-center lg:items-start justify-center">
+      <main className="z-10 w-full flex flex-col items-center justify-center px-4">
         {gameState === 'idle' ? (
-          <div className="flex flex-col items-center gap-6 w-full max-w-md p-10 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] shadow-2xl">
+          <div className="flex flex-col items-center gap-6 w-full max-w-sm sm:max-w-md p-6 sm:p-10 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl animate-in fade-in zoom-in duration-700">
             {/* INU Lion Image */}
-            <div className="relative w-40 h-40 mb-2 animate-float">
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 mb-2 animate-float">
               <img 
                 src="/inu_lion.png" 
                 alt="INU Lion" 
@@ -92,23 +92,23 @@ export default function Home() {
             </div>
             
             <div className="w-full space-y-2">
-              <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest ml-1">Player Identity</label>
+              <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest ml-1">Player Identity</label>
               <input 
                 type="text" 
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 placeholder="이름을 입력하세요"
-                className="w-full px-6 py-4 bg-black/40 border border-white/10 rounded-2xl focus:outline-none focus:border-blue-500/50 transition-all text-lg font-medium placeholder:text-zinc-700"
+                className="w-full px-5 py-4 bg-black/40 border border-white/10 rounded-xl focus:outline-none focus:border-blue-500/50 transition-all text-base sm:text-lg font-medium placeholder:text-zinc-700 text-center"
               />
             </div>
             <button 
               onClick={handleStart}
-              className="group relative w-full overflow-hidden rounded-2xl bg-white px-8 py-5 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="group relative w-full overflow-hidden rounded-xl bg-white px-8 py-4 sm:py-5 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-              <span className="text-xl font-black text-black tracking-tight">GAME START</span>
+              <span className="text-lg sm:text-xl font-black text-black tracking-tight">GAME START</span>
             </button>
-            <div className="text-zinc-600 text-xs font-medium tracking-widest pt-4 border-t border-white/5 w-full text-center uppercase">
+            <div className="text-zinc-600 text-[10px] font-medium tracking-widest pt-4 border-t border-white/5 w-full text-center uppercase">
               신소재공학과_202501183_이서진
             </div>
           </div>
