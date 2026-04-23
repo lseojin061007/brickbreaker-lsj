@@ -81,7 +81,16 @@ export default function Home() {
 
       <main className="z-10 w-full max-w-6xl flex flex-col lg:flex-row gap-12 items-center lg:items-start justify-center">
         {gameState === 'idle' ? (
-          <div className="flex flex-col items-center gap-8 w-full max-w-md p-10 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] shadow-2xl">
+          <div className="flex flex-col items-center gap-6 w-full max-w-md p-10 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] shadow-2xl">
+            {/* INU Lion Image */}
+            <div className="relative w-40 h-40 mb-2 animate-float">
+              <img 
+                src="/inu_lion.png" 
+                alt="INU Lion" 
+                className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              />
+            </div>
+            
             <div className="w-full space-y-2">
               <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest ml-1">Player Identity</label>
               <input 
