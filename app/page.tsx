@@ -135,9 +135,14 @@ export default function Home() {
                       </div>
                       <h2 className="text-5xl font-black text-white mb-2 italic">MISSION COMPLETE</h2>
                       <p className="text-zinc-400 mb-8">성공적으로 임무를 완수했습니다!</p>
-                      <div className="bg-white/5 border border-white/10 rounded-2xl p-6 w-full mb-10">
+                      <div className="bg-white/5 border border-white/10 rounded-2xl p-6 w-full mb-6">
                         <div className="text-xs text-zinc-500 uppercase font-bold tracking-widest mb-1">Final Time</div>
                         <div className="text-4xl font-black text-blue-400 font-mono tracking-tighter">{finalTime}</div>
+                      </div>
+                      
+                      {/* Top 3 Hall of Fame */}
+                      <div className="w-full mb-10">
+                        <Leaderboard />
                       </div>
                     </>
                   ) : (
