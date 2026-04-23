@@ -262,7 +262,24 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
           if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + 25) {
             dy = -dy;
             b.status = 0;
-            hitSoundRef.current?.play().catch(() => {});
+            
+            // Web Audio API Synthesis for Hit Sound
+            try {
+              const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.connect(gain);
+              gain.connect(audioCtx.destination);
+              osc.type = 'square';
+              osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+              osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.05);
+              gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+              gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+              osc.start();
+              osc.stop(audioCtx.currentTime + 0.1);
+            } catch (e) {
+              console.error("Audio Synthesis failed:", e);
+            }
             
             if (b.color === COLORS.RED) {
               setRedBricksRemoved(prev => {
