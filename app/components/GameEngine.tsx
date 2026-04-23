@@ -36,7 +36,7 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
   const [time, setTime] = useState(0);
   const [redBricksRemoved, setRedBricksRemoved] = useState(0);
   
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number | null>(null);
   const gameRef = useRef({
     ball: { x: 0, y: 0, dx: 4, dy: -4 },
     paddle: { x: 0 },
@@ -320,7 +320,9 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
 
   useEffect(() => {
     requestRef.current = requestAnimationFrame(draw);
-    return () => cancelAnimationFrame(requestRef.current!);
+    return () => {
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    };
   }, [draw]);
 
   const togglePause = () => {
