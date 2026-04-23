@@ -317,76 +317,93 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
   };
 
   return (
-    <div className="relative flex flex-col items-center">
-      {/* HUD */}
-      <div className="w-full flex justify-between items-center mb-4 px-2 text-white font-mono">
-        <div className="flex flex-col">
-          <span className="text-[10px] text-zinc-500 uppercase">Lives</span>
-          <div className="flex gap-1">
-            {[...Array(INITIAL_LIVES)].map((_, i) => (
-              <div key={i} className={`w-3 h-3 rounded-full ${i < lives ? 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 'bg-zinc-800'}`}></div>
-            ))}
+    <div className="relative flex flex-col lg:flex-row items-center lg:items-start gap-8">
+      <div className="flex flex-col items-center">
+        {/* HUD */}
+        <div className="w-full flex justify-between items-center mb-4 px-2 text-white font-mono">
+          <div className="flex flex-col">
+            <span className="text-[10px] text-zinc-500 uppercase">Lives</span>
+            <div className="flex gap-1">
+              {[...Array(INITIAL_LIVES)].map((_, i) => (
+                <div key={i} className={`w-3 h-3 rounded-full ${i < lives ? 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]' : 'bg-zinc-800'}`}></div>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-[10px] text-zinc-500 uppercase">Target (Red)</span>
+            <span className="text-xl font-black text-red-400">{redBricksRemoved} / 3</span>
+          </div>
+          <div className="flex flex-col items-end">
+            <span className="text-[10px] text-zinc-500 uppercase">Time</span>
+            <span className="text-xl font-black tabular-nums">{Math.floor(time / 60)}:{(time % 60).toString().padStart(2, '0')}</span>
           </div>
         </div>
-        <div className="flex flex-col items-center">
-          <span className="text-[10px] text-zinc-500 uppercase">Target (Red)</span>
-          <span className="text-xl font-black text-red-400">{redBricksRemoved} / 3</span>
-        </div>
-        <div className="flex flex-col items-end">
-          <span className="text-[10px] text-zinc-500 uppercase">Time</span>
-          <span className="text-xl font-black tabular-nums">{Math.floor(time / 60)}:{(time % 60).toString().padStart(2, '0')}</span>
+
+        {/* Canvas */}
+        <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+          <canvas 
+            ref={canvasRef} 
+            width={400} 
+            height={500} 
+            className="max-w-full h-auto touch-none"
+          />
+
+          {/* Overlays */}
+          {gameState === 'countdown' && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-20">
+              <span className="text-8xl font-black text-white animate-ping">{countdown}</span>
+            </div>
+          )}
+
+          {gameState === 'paused' && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 backdrop-blur-md z-20">
+              <h2 className="text-4xl font-black text-white mb-8 italic tracking-tighter">PAUSED</h2>
+              <button 
+                onClick={togglePause}
+                className="px-8 py-3 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform"
+              >
+                RESUME
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Canvas */}
-      <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black">
-        <canvas 
-          ref={canvasRef} 
-          width={400} 
-          height={500} 
-          className="max-w-full h-auto touch-none"
-        />
-
-        {/* Overlays */}
-        {gameState === 'countdown' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-20">
-            <span className="text-8xl font-black text-white animate-ping">{countdown}</span>
+      {/* Side Controls */}
+      <div className="flex flex-col gap-4 w-full lg:w-40 lg:mt-14">
+        <div className="p-4 bg-white/5 border border-white/10 rounded-2xl flex flex-col gap-3">
+          <h3 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest text-center mb-1">Controls</h3>
+          <button 
+            onClick={togglePause}
+            className="w-full py-4 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-bold transition-all text-white flex flex-col items-center justify-center gap-1"
+          >
+            <span className="text-xs opacity-50 uppercase tracking-tighter">Stop</span>
+            {gameState === 'paused' ? '게임재개' : '게임멈추기'}
+          </button>
+          <button 
+            onClick={onQuit}
+            className="w-full py-4 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-xl text-sm font-bold text-blue-400 transition-all flex flex-col items-center justify-center gap-1"
+          >
+            <span className="text-xs opacity-50 uppercase tracking-tighter">Restart</span>
+            다시 시작
+          </button>
+          <button 
+            onClick={onQuit}
+            className="w-full py-4 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-xl text-sm font-bold text-red-400 transition-all flex flex-col items-center justify-center gap-1"
+          >
+            <span className="text-xs opacity-50 uppercase tracking-tighter">Exit</span>
+            게임 종료
+          </button>
+        </div>
+        
+        {/* Mobile Swipe Tip */}
+        <div className="hidden lg:flex p-4 bg-white/5 border border-white/10 rounded-2xl flex-col items-center gap-2">
+          <span className="text-[10px] font-bold text-zinc-600 uppercase">Movement</span>
+          <div className="flex gap-2">
+            <span className="px-2 py-1 bg-white/5 rounded border border-white/10 text-[10px]">←</span>
+            <span className="px-2 py-1 bg-white/5 rounded border border-white/10 text-[10px]">→</span>
           </div>
-        )}
-
-        {gameState === 'paused' && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 backdrop-blur-md z-20">
-            <h2 className="text-4xl font-black text-white mb-8 italic tracking-tighter">PAUSED</h2>
-            <button 
-              onClick={togglePause}
-              className="px-8 py-3 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform"
-            >
-              RESUME
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* Controls */}
-      <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <button 
-          onClick={togglePause}
-          className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-bold transition-all min-w-[120px]"
-        >
-          {gameState === 'paused' ? '게임재개' : '게임멈추기'}
-        </button>
-        <button 
-          onClick={onQuit}
-          className="px-6 py-3 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-xl text-sm font-bold text-blue-400 transition-all min-w-[120px]"
-        >
-          다시 시작
-        </button>
-        <button 
-          onClick={onQuit}
-          className="px-6 py-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-xl text-sm font-bold text-red-400 transition-all min-w-[120px]"
-        >
-          게임 종료
-        </button>
+        </div>
       </div>
     </div>
   );
