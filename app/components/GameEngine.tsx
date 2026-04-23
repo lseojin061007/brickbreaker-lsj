@@ -53,16 +53,21 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
 
   // Initialize Audio
   useEffect(() => {
-    bgMusicRef.current = new Audio('/Hyper_Speed_Run.mp3');
-    bgMusicRef.current.loop = true;
-    bgMusicRef.current.volume = 0.2;
+    // Background Music
+    const bg = new Audio('/Hyper_Speed_Run.mp3');
+    bg.loop = true;
+    bg.volume = 0.15; // Low volume as requested
+    bgMusicRef.current = bg;
 
-    hitSoundRef.current = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); // Fallback hit sound
-    hitSoundRef.current.volume = 0.3;
+    // Effect Sound (Collision)
+    const hit = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); 
+    hit.volume = 0.2;
+    hitSoundRef.current = hit;
 
     return () => {
-      bgMusicRef.current?.pause();
+      bg.pause();
       bgMusicRef.current = null;
+      hitSoundRef.current = null;
     };
   }, []);
 
@@ -70,25 +75,9 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
   useEffect(() => {
     const bricks = [];
     const totalBricks = BRICK_ROWS * BRICK_COLS;
-    const redBrickCount = Math.floor(totalBricks * 0.3); // 30% red bricks
-    let redPlaced = 0;
-
-    // Create a pool of colors
-    const pool = [];
-    for (let i = 0; i < totalBricks; i++) {
-      if (redPlaced < redBrickCount) {
-        pool.push(COLORS.RED);
-        redPlaced++;
-      } else {
-        pool.push(COLOR_LIST[Math.floor(Math.random() * COLOR_LIST.length)]);
-      }
-    }
     
-    // Shuffle pool
-    for (let i = pool.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
-    }
+    // Combine all colors including red
+    const allColors = [COLORS.RED, ...COLOR_LIST];
 
     const canvas = canvasRef.current;
     if (canvas) {
@@ -96,7 +85,8 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
       const brickHeight = 25;
       for (let c = 0; c < BRICK_COLS; c++) {
         for (let r = 0; r < BRICK_ROWS; r++) {
-          const color = pool.pop() || COLORS.BLUE;
+          // Purely random color from the list
+          const color = allColors[Math.floor(Math.random() * allColors.length)];
           bricks.push({
             x: c * brickWidth + 10,
             y: r * brickHeight + 50,

@@ -1,4 +1,4 @@
-export const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzljLZjePg4oQxXzkk-75uz5Ll-tL0a-U_85hEF9a3hgpBqrmoEX4vo7rvImedIFQi0/exec";
+export const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzJLyhd5MxsvCMcyLHMlBGlAwYuE7PHBaGYHECJgUCIfNyWn2WScanOFfuEikT5TdrN/exec";
 
 export interface RankingData {
   name: string;
