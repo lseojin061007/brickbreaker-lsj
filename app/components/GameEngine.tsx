@@ -44,6 +44,7 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
     keys: { left: false, right: false },
     touchX: null as number | null,
     startTime: 0,
+    startTimestamp: '',
     pausedTime: 0,
     lastTime: 0,
   });
@@ -125,6 +126,7 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
     } else if (gameState === 'countdown' && countdown === 0) {
       setGameState('playing');
       gameRef.current.startTime = Date.now();
+      gameRef.current.startTimestamp = new Date().toLocaleString('ko-KR');
       bgMusicRef.current?.play().catch(e => console.log("Audio play failed:", e));
     }
   }, [gameState, countdown]);
@@ -295,7 +297,8 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
                   // Submit to Google Sheets
                   submitScore({
                     name: userName,
-                    finishtime: timeStr
+                    finishtime: timeStr,
+                    timestamp: gameRef.current.startTimestamp
                   });
                 }
                 return newVal;
