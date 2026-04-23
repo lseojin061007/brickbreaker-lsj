@@ -75,9 +75,25 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
   useEffect(() => {
     const bricks = [];
     const totalBricks = BRICK_ROWS * BRICK_COLS;
+    const redBrickCount = Math.floor(totalBricks * 0.3); // 30% red bricks
+    let redPlaced = 0;
+
+    // Create a pool of colors
+    const pool = [];
+    for (let i = 0; i < totalBricks; i++) {
+      if (redPlaced < redBrickCount) {
+        pool.push(COLORS.RED);
+        redPlaced++;
+      } else {
+        pool.push(COLOR_LIST[Math.floor(Math.random() * COLOR_LIST.length)]);
+      }
+    }
     
-    // Combine all colors including red
-    const allColors = [COLORS.RED, ...COLOR_LIST];
+    // Shuffle pool
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
 
     const canvas = canvasRef.current;
     if (canvas) {
@@ -85,8 +101,7 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
       const brickHeight = 25;
       for (let c = 0; c < BRICK_COLS; c++) {
         for (let r = 0; r < BRICK_ROWS; r++) {
-          // Purely random color from the list
-          const color = allColors[Math.floor(Math.random() * allColors.length)];
+          const color = pool.pop() || COLORS.BLUE;
           bricks.push({
             x: c * brickWidth + 10,
             y: r * brickHeight + 50,
