@@ -363,18 +363,24 @@ export default function GameEngine({ userName, onGameEnd, onQuit }: GameEnginePr
       </div>
 
       {/* Controls */}
-      <div className="mt-8 flex gap-4">
+      <div className="mt-8 flex flex-wrap justify-center gap-3">
         <button 
           onClick={togglePause}
-          className="px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full text-sm font-bold transition-all"
+          className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl text-sm font-bold transition-all min-w-[120px]"
         >
-          {gameState === 'paused' ? 'RESUME' : 'PAUSE'}
+          {gameState === 'paused' ? '게임재개' : '게임멈추기'}
         </button>
         <button 
           onClick={onQuit}
-          className="px-6 py-2 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-full text-sm font-bold text-red-400 transition-all"
+          className="px-6 py-3 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 rounded-xl text-sm font-bold text-blue-400 transition-all min-w-[120px]"
         >
-          QUIT
+          다시 시작
+        </button>
+        <button 
+          onClick={onQuit}
+          className="px-6 py-3 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-xl text-sm font-bold text-red-400 transition-all min-w-[120px]"
+        >
+          게임 종료
         </button>
       </div>
     </div>

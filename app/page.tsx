@@ -171,30 +171,6 @@ export default function Home() {
           </div>
         )}
 
-        {/* Sidebar: Leaderboard & Information (Only shown during or after game) */}
-        {gameState !== 'idle' && (
-          <div className="flex flex-col gap-8 w-full max-w-md animate-in slide-in-from-right duration-700">
-            <Leaderboard />
-            
-            <div className="p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl">
-              <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">Game Information</h3>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-zinc-400">Target</span>
-                  <span className="text-red-400 font-bold">Remove 3 Red Bricks</span>
-                </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-zinc-400">Lives</span>
-                  <span className="text-white font-bold">3 Hearts</span>
-                </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-zinc-400">Controls</span>
-                  <span className="text-white font-bold">Arrow Keys / Swipe</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </main>
 
       <footer className="z-10 mt-16 py-8 border-t border-white/5 w-full max-w-6xl flex justify-between items-center text-zinc-600 text-[10px] font-bold tracking-widest uppercase">
